@@ -26,5 +26,24 @@
 
 }
 
+-(void) resetDice {
 
+        for (Dice *dice in self.heldDice) {
+            [self.heldDice removeObject:dice];
+        }
+}
+
+-(void) showDiceScore {
+    int totalDiceScore = 0;
+    int heldDiceScore = 0;
+    for (Dice *allDice in self.allDice) {
+        totalDiceScore = totalDiceScore + allDice.diePoints;
+    }
+    for (Dice *heldDice in self.heldDice) {
+        heldDiceScore = heldDiceScore = heldDice.diePoints;
+    }
+    NSLog(@"Total dice score equals: %d\n Held dice score equals: %d\n", totalDiceScore, heldDiceScore);
+}
+
+    
 @end

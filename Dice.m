@@ -22,26 +22,32 @@
     switch (rollValue) {
         case 1:
             self.diceValue = @"i";
+            self.diePoints = 0;
             break;
     
         case 2:
             self.diceValue = @"ii";
+            self.diePoints = 0;
             break;
             
         case 3:
             self.diceValue = @"iii";
+            self.diePoints = 0;
             break;
             
         case 4:
             self.diceValue = @"iv";
+            self.diePoints = 4;
             break;
             
         case 5:
             self.diceValue = @"v";
+            self.diePoints = 5;
             break;
             
         case 6:
             self.diceValue = @"vi";
+            self.diePoints = 6;
             break;
             
         default:

@@ -70,13 +70,21 @@ int main(int argc, const char * argv[])
                 }
             }
             
+            [gameController showDiceScore];
+            
             NSString *holdDie = [playerInput inputForPrompt:@"What dice would you like to hold?"];
+            if ([holdDie isEqual:@"reset"]) {
+                [gameController resetDice];
+            }
             
             for (Dice *dice in gameController.allDice) {
-                if ([dice.dieIndex isEqual:holdDie]){
+                if ([dice.dieIndex rangeOfString: holdDie].location == 0){
                     [gameController addToHeld:dice];
                     
                     NSString *dropDie = [playerInput inputForPrompt:@"Did you pick up by mistake? y/n"];
+                    if ([dropDie isEqual:@"reset"]) {
+                        [gameController resetDice];
+                    }
                     
                     if ([dropDie isEqual:@"y"]) {
                         [gameController addToHeld:dice];
@@ -87,7 +95,9 @@ int main(int argc, const char * argv[])
             
             NSString *rollAgainInput = [playerInput inputForPrompt:@"Would you like to roll again:\n y/n"];
             
-        
+            if ([rollAgainInput isEqual:@"reset"]) {
+                [gameController resetDice];
+            }
             if ([rollAgainInput isEqual:@"y"]) {
                 roll = YES;
                 

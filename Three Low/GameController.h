@@ -17,5 +17,7 @@
 
 
 -(void) addToHeld:(Dice *) die;
+-(void) resetDice;
+-(void) showDiceScore;
 
 @end

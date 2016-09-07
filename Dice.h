@@ -12,6 +12,7 @@
 
 @property (nonatomic) NSString *diceValue;
 @property (nonatomic) NSString *dieIndex;
+@property (nonatomic) int diePoints;
 
 -(NSString*) rollDie;
 
