@@ -12,7 +12,17 @@
 
 
 -(void) addToHeld:(Dice *) die{
-            [self.heldDice addObject: die];
+    
+    BOOL dieIsHeld = [self.heldDice containsObject:die];
+    
+    if (dieIsHeld == NO) {
+        
+        [self.heldDice addObject: die];
+    }
+    
+    else {
+        [self.heldDice removeObject:die];
+    }
 
 }
 
