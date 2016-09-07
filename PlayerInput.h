@@ -1,5 +1,5 @@
 //
-//  Dice.h
+//  PlayerInput.h
 //  Three Low
 //
 //  Created by Tevin Maker on 2016-09-07.
@@ -8,11 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Dice : NSObject
+@interface PlayerInput : NSObject
 
-@property (nonatomic) NSString *diceValue;
-@property (nonatomic) NSString *dieIndex;
-
--(NSString*) rollDie;
+-(NSString *)inputForPrompt:(NSString *)promptString;
 
 @end

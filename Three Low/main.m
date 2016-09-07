@@ -8,10 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "Dice.h"
+#import "PlayerInput.h"
+#import "GameController.h"
 
 
-int main(int argc, const char * argv[]) {
-    @autoreleasepool {
+int main(int argc, const char * argv[])
+{
+    @autoreleasepool
+    {
       
         BOOL roll = YES;
         
@@ -21,17 +25,71 @@ int main(int argc, const char * argv[]) {
         Dice *die4 = [[Dice alloc] init];
         Dice *die5 = [[Dice alloc] init];
         
+        die1.dieIndex = @"Die 1";
+        die2.dieIndex = @"Die 2";
+        die3.dieIndex = @"Die 3";
+        die4.dieIndex = @"Die 4";
+        die5.dieIndex = @"Die 5";
         
-        while (roll == YES) {
+
+        PlayerInput *playerInput = [[PlayerInput alloc] init];
         
-        [die1 rollDie];
-        [die2 rollDie];
-        [die3 rollDie];
-        [die4 rollDie];
-        [die5 rollDie];
+        GameController *gameController = [[GameController alloc] init];
+        
+        
+        gameController.allDice = [[NSMutableArray alloc] init];
+        
+        gameController.allDice = [NSMutableArray arrayWithObjects: die1, die2, die3, die4, die5, nil];
+        
+//        gameController.allDice = [@[die1, die2] mutableCopy];
+        
+        gameController.heldDice = [[NSMutableSet alloc] init];
+        
+
+
+        
+        while (roll == YES)
+        {
+        
+            for (Dice *die in gameController.allDice) {
+                BOOL dieIsHeld = [gameController.heldDice containsObject:die];
+                
+                if (dieIsHeld == NO) {
+                [die rollDie];
+                }
+            }
+
+            for (Dice *die in gameController.allDice) {
+                BOOL dieIsHeld = [gameController.heldDice containsObject:die];
+                if (dieIsHeld == NO) {
+        
+                    NSLog(@"%@ rolls a %@", die.dieIndex, die.diceValue);
+                }
+                if (dieIsHeld == YES) {
+                    NSLog(@"%@ is held and is a %@", die.dieIndex, die.diceValue);
+                }
+            }
             
+            
+            NSString *rollAgainInput = [playerInput inputForPrompt:@"Would you like to roll again:\n y/n"];
+            
+        
+            if ([rollAgainInput isEqual:@"y"]) {
+                roll = YES;
+                
+                NSString *holdDie = [playerInput inputForPrompt:@"What dice would you like to hold?"];
+                
+                for (Dice *dice in gameController.allDice) {
+                    if ([dice.dieIndex isEqual:holdDie]){
+                        [gameController addToHeld:dice];
+                    }
+           
+                }
+            }
+            else {
+                roll = NO;
+            }
         }
     }
-    
     return 0;
 }

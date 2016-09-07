@@ -10,6 +10,8 @@
 
 @implementation Dice
 
+
+
 -(NSString*) rollDie {
     
     int from = 1;
